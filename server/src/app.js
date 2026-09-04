@@ -4,6 +4,7 @@ const helmet = require("helmet");
 const rateLimit = require("express-rate-limit");
 const authRoutes = require("./routes/authRoutes");
 const adminRoutes = require("./routes/adminRoutes");
+const projectRoutes = require("./routes/projectRoutes");
 
 const app = express();
 
@@ -22,6 +23,7 @@ app.use(limiter);
 // Routes
 app.use("/api/v1/auth", authRoutes);
 app.use("/api/v1/admin", adminRoutes);
+app.use("/api/v1/projects", projectRoutes);
 
 
 
