@@ -10,13 +10,20 @@ const createProject = async (req, res) => {
       message: "Project created successfully",
       project,
     });
-  } catch (error) {
-    console.error("CREATE PROJECT ERROR:", error);
+        } catch (error) {
+            console.error("CREATE PROJECT ERROR:", error);
 
-    res.status(500).json({
-      success: false,
-      message: "Server error",
-    });
+            if (error.name === "ValidationError") {
+        return res.status(400).json({
+            success: false,
+            message: error.message,
+        });
+        }
+
+        res.status(500).json({
+        success: false,
+        message: "Server error",
+        });
   }
 };
 

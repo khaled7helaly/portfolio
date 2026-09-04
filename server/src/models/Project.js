@@ -6,12 +6,16 @@ const projectSchema = new mongoose.Schema(
       type: String,
       required: true,
       trim: true,
+      minlength: 3,
+      maxlength: 100,
     },
 
     description: {
       type: String,
       required: true,
       trim: true,
+      minlength: 10,
+      maxlength: 1000,
     },
 
     image: {
@@ -22,15 +26,25 @@ const projectSchema = new mongoose.Schema(
     technologies: {
       type: [String],
       default: [],
+      validate: {
+        validator: function (technologies) {
+          return technologies.every(
+            (technology) => technology.trim().length > 0
+          );
+        },
+        message: "Technology name cannot be empty",
+      },
     },
 
     liveUrl: {
       type: String,
+      trim: true,
       default: "",
     },
 
     githubUrl: {
       type: String,
+      trim: true,
       default: "",
     },
 
