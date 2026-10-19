@@ -10,6 +10,9 @@ const MAX_TILT = 14; // أقصى ميلان بالدرجات
 const RIBBON_A = ["Full stack developer", "React & Node.js", "Interfaces that feel fast", "Clean, tested code"];
 const RIBBON_B = ["Open to freelance work", "Let's build your next product", "Say hello", "Portfolio below"];
 
+/* الجملة الحمرا تحت الاسم — عدّلها (لو تقصد MySQL اكتبها هنا) */
+const ROLE = "I’m a MERN Stack Developer & UI/UX enthusiast.";
+
 /* أعمال مختارة + سوشيال — بيانات تجريبية */
 const WORK = [
   { name: "Project one", meta: "Web app" },
@@ -21,6 +24,32 @@ const SOCIALS = [
   { label: "LinkedIn", href: "https://linkedin.com/" },
   { label: "Email", href: "mailto:hello@example.com" },
 ];
+
+/* أيقونات الزراير */
+const iconProps = {
+  viewBox: "0 0 24 24",
+  fill: "none",
+  stroke: "currentColor",
+  strokeWidth: 2,
+  strokeLinecap: "round",
+  strokeLinejoin: "round",
+  "aria-hidden": true,
+};
+
+const GridIcon = () => (
+  <svg {...iconProps}>
+    <rect x="3" y="3" width="7" height="7" rx="1.5" />
+    <rect x="14" y="3" width="7" height="7" rx="1.5" />
+    <rect x="3" y="14" width="7" height="7" rx="1.5" />
+    <rect x="14" y="14" width="7" height="7" rx="1.5" />
+  </svg>
+);
+
+const DownloadIcon = () => (
+  <svg {...iconProps}>
+    <path d="M12 4v11M7 11l5 5 5-5M5 20h14" />
+  </svg>
+);
 
 function Ribbon({ items, variant }) {
   const loop = Array.from({ length: 4 }, () => items).flat();
@@ -64,11 +93,20 @@ export default function Hero() {
 
       <div className="hero__main">
         <div className="hero__intro">
-          <h1>I'm Khaled. I build web products that feel fast.</h1>
-          <p>Full stack developer working with React and Node.js, from the database to the last pixel.</p>
+          <h1 className="hero__title">
+            <span className="hero__hello">Hello, I am</span>{" "}
+            <span className="hero__name" lang="ar">Khaled Helaly </span>
+          </h1>
+          <p className="hero__role">{ROLE}</p>
           <div className="hero__cta">
-            <a className="btn btn--solid" href="#projects">View projects</a>
-            <a className="btn" href="/Khaled-CV.pdf" download>Download CV</a>
+            <a className="btn btn--solid" href="#projects">
+              <GridIcon />
+              View projects
+            </a>
+            <a className="btn btn--ghost" href="/Khaled-CV.pdf" download>
+              <DownloadIcon />
+              Download CV
+            </a>
           </div>
         </div>
 
