@@ -4,7 +4,7 @@
 
 | Batch | Scope | Status |
 |-------|-------|--------|
-| **Batch 1** | TypeScript architecture, Navigation/Hero, About, scroll-linked photo transition | ✅ In progress |
+| **Batch 1** | TypeScript architecture, Navigation/Hero, About, scroll-linked photo transition | ✅ Done |
 | Batch 2 | Skills section | Planned |
 | Batch 3 | Featured Projects section + Projects page | Planned |
 | Batch 4 | Education & Learning section | Planned |
