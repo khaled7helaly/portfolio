@@ -1,16 +1,56 @@
-# React + Vite
+# Portfolio frontend
 
-This template provides a minimal setup to get React working in Vite with HMR and some Oxlint rules.
+This directory contains the Vite + React frontend. It uses JavaScript and local
+mock data only; it does not connect to or implement a backend.
 
-Currently, two official plugins are available:
+## Getting started
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+```bash
+npm install
+npm run dev
+```
 
-## React Compiler
+## Architecture
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+- `src/app/`: application routing and shared layouts.
+- `src/pages/`: route-level screens.
+- `src/sections/`: composable portfolio sections.
+- `src/components/`: reusable presentation components and feedback.
+- `src/content/`: fixed interface copy and navigation labels.
+- `src/data/mock/`: local project and certificate records.
+- `src/services/`: asynchronous public-data access; replace the mock imports
+  here when an API is introduced.
+- `src/hooks/`: React data state, loading/error handling, and retry behavior.
+- `src/styles/`: design tokens and global browser styles.
 
-## Expanding the Oxlint configuration
+The data flow is `pages/sections -> hooks -> services -> data/mock`. UI
+components must not import mock records directly. Before connecting an API,
+validate and map its responses in the service layer to preserve the frontend
+data contract; this scaffold does not assume that API work is change-free.
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and Oxlint's TypeScript related rules in your project.
+Projects use `id` and `slug` as unique identifiers. `featured` controls the
+home-page selection, `published` controls public visibility, and `status`
+describes the project's progress. `technologies` is an array of labels;
+`image`, `liveUrl`, and `githubUrl` are optional strings and may be empty.
+Certificates use unique `id` values, `title`, `issuer`, `issueDate`,
+`credentialUrl`, `image`, and `published`. The mock certificate record is an
+explicitly labeled unpublished placeholder, not a qualification claim.
+Project mock records are also explicit unpublished placeholders and are
+filtered out of public service results.
+
+## Routes
+
+- `/` — home page with featured projects and certificates
+- `/projects` — published projects
+- `/projects/:slug` — published project details; missing or unpublished slugs
+  show an unavailable state
+- `*` — not-found page
+
+## Scripts
+
+- `npm run dev` — start Vite
+- `npm run lint` — run Oxlint
+- `npm run build` — create the production bundle
+- `npm run preview` — preview the production bundle
+
+There is not yet a test runner configured in this client package.
